@@ -1,9 +1,16 @@
+import { useTexture } from "@react-three/drei";
+
 // import { useControls } from "leva";
-export default function Plane() {
+export default function Plane(props) {
+  const textures = useTexture({
+    map: "./textures/grass/color.jpg",
+    normalMap: "./textures/grass/normal.jpg",
+    roughnessMap: "./textures/grass/roughness.jpg",
+  });
   return (
-    <mesh rotation={[5, 0, 0]} position={[0, -2, 0]}>
-      <planeGeometry args={[10, 10]} />
-      <meshBasicMaterial color="yellowgreen" />
+    <mesh rotation={props.rotation} position={props.position} receiveShadow>
+      <planeGeometry args={props.args} receiveShadow />
+      <meshStandardMaterial {...textures} />
     </mesh>
   );
 }
